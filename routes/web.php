@@ -19,13 +19,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('tipoproduto', "App\Http\Controllers\TipoProdutoController@index");
-Route::get('tipoproduto/create', "App\Http\Controllers\TipoProdutoController@create");
-Route::post('tipoproduto', "App\Http\Controllers\TipoProdutoController@store");
+Route::get('tipoproduto', "App\Http\Controllers\TipoProdutoController@index")->name("tipoproduto.index");
+Route::get('tipoproduto/create', "App\Http\Controllers\TipoProdutoController@create")->name("tipoproduto.create");
+Route::post('tipoproduto', "App\Http\Controllers\TipoProdutoController@store")->name("tipoproduto.store");
 
-Route::get('produto', "App\Http\Controllers\ProdutoController@index");
-Route::get('produto/create', "App\Http\Controllers\ProdutoController@create");
-Route::post('produto', "App\Http\Controllers\ProdutoController@store");
+Route::get('produto', "App\Http\Controllers\ProdutoController@index")->name("produto.index");
+Route::get('produto/create', "App\Http\Controllers\ProdutoController@create")->name("produto.create");
+Route::post('produto', "App\Http\Controllers\ProdutoController@store")->name("produto.store");
+
+Route::get('produto/{id}', "App\Http\Controllers\ProdutoController@show")->name("produto.show");
+//Esta rota, ela faz automaticamente no padrão que o laravel espera, sem precisar Rota por Rota
+//Route:: resource('produto',"App\Http\Controllers\ProdutoController");
 
 
 

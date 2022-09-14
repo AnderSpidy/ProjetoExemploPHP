@@ -13,7 +13,7 @@
 <body>
     <div class="container">
         {{-- <?php print_r($produtos) ?> --}}
-        <a class="btn btn-primary" href="produto/create">Criar Produto</a>
+        <a class="btn btn-primary" href="{{route("produto.create")}}">Criar Produto</a>
         <a class="btn btn-primary" href="#">Voltar</a>
         <table class="table table-hover">
             <thead>
@@ -33,7 +33,7 @@
                         <td>{{$produto->preco}}</td>
                         <td>{{$produto->descricao}}</td>
                         <td>
-                            <a href="#" class="btn btn-primary">Mostrar</a>
+                            <a href="{{route("produto.show", $produto->id)}}" class="btn btn-primary">Mostrar</a>
                             <a href="#" class="btn btn-secondary">Editar</a>
                             <a href="#" class="btn btn-danger">Remover</a>
                         </td>

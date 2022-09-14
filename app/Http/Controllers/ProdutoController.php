@@ -55,7 +55,27 @@ class ProdutoController extends Controller
      */
     public function show($id)
     {
-        //
+        // O DB Select sempre retorna um array [obj], [obj,obj,obj,.....] oi []
+         $produtos = DB::select("SELECT PRODUTOS.id,
+                                 PRODUTOS.nome,
+                                 PRODUTOS.preco,
+                                 Produtos.Tipo_Produtos_id,
+                                 TIPO_PRODUTOS.descricao,
+                                 Produtos.ingredientes,
+                                 Produtos.urlImage,
+                                 Produtos.updated_at,
+                                 Produtos.created_at
+                            FROM PRODUTOS
+                            JOIN TIPO_PRODUTOS ON PRODUTOS.TIPO_PRODUTOS_ID = TIPO_PRODUTOS.ID
+                            WHERE Produtos.id = ?", [$id]);
+        //$produto = Produto::find($id); //Retorna um objeto ou NUll
+        //dd($produto);
+
+        //é cadrrgado a view de Produto, criando dentro dela um objeto chamando "produto" com o conteudo de
+        //$produto que esta no controldor
+        if(count($produtos) > 0)
+            return view("Produto/show")->with("produtos",$produtos[0]);
+        echo "Produto não encontrado";
     }
 
     /**
