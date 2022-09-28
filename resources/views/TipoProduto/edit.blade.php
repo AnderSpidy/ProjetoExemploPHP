@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Create de TipoProduto</title>
+    <title>Edit produto</title>
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <!-- JavaScript Bundle with Popper -->
@@ -12,22 +13,24 @@
 </head>
 <body>
     <div class="container">
-        <form method="post" action="{{route("tipoproduto.store")}}">
+        <form action="{{route("tipoproduto.update", $tipoProduto->id)}}" method="POST">
             @csrf
+            @method('PUT')
             <div class="form-group">
-                <label for="id-input-id">ID</label>
-                <input type="text" class="form-control" id="id-input-id" aria-describedby="idHelp" placeholder="#" disabled>
-                <small id="idHelp" class="form-text text-muted">Não é necessário informar o ID para cadastrar um novo dado.</small>
+                <label for="id-input-id" class="form-label">ID</label>
+                <input type="text" class="form-control" id="id-input-id" aria-describedby="idHelp" placeholder="#" value="{{$tipoProduto->id}}" disabled>
+                <div id="id" class="form-text">Não será necessário cadastrar um id</div>
             </div>
             <div class="form-group">
-                <label for="id-input-descricao">Descrição</label>
-                <input name="descricao" type="text" class="form-control" id="id-input-descricao" placeholder="Digite a descrição">
+                <label for="id-input-nome" class="form-label">Descrição</label>
+                <input name="descricao" type="text" class="form-control" id="id-input-nome" placeholder="Digite o nome" value="{{$tipoProduto->descricao}}" required>
             </div>
+
             <div class="my-1">
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <a class="btn btn-primary" href="{{route("tipoproduto.index")}}">Voltar</a>
+                <a href="{{route("tipoproduto.index")}}" class="btn btn-primary">Voltar</a>
+                <button type="submit" class="btn btn-primary">Salvar</button>
             </div>
-        </form>
+          </form>
     </div>
 </body>
 </html>

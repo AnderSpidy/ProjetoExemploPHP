@@ -45,15 +45,6 @@
             <input type="text" class="form-control" value={{$produtos->created_at}} disabled>
         </div>
 
-
-        <p>{{$produtos->id}}</p>
-        <p>{{$produtos->nome}}</p>
-        <p>{{$produtos->preco}}</p>
-        <p>{{$produtos->descricao}}</p>
-        <p>{{$produtos->ingredientes}}</p>
-        <p>{{$produtos->urlImage}}</p>
-        <p>{{$produtos->updated_at}}</p>
-        <p>{{$produtos->created_at}}</p>
         <div class="m-3">
             <a href="{{route("produto.index")}}" class="btn btn-primary">Voltar</a>
         </div>
