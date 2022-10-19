@@ -27,15 +27,29 @@ Route::get('tipoproduto/{id}/edit', "App\Http\Controllers\TipoProdutoController@
 Route::put('tipoproduto/{id}', "App\Http\Controllers\TipoProdutoController@update")->name("tipoproduto.update");
 Route::delete('tipoproduto/{id}', "App\Http\Controllers\TipoProdutoController@destroy")->name("tipoproduto.destroy");
 
-Route::get('produto', "App\Http\Controllers\ProdutoController@index")->name("produto.index");
-Route::get('produto/create', "App\Http\Controllers\ProdutoController@create")->name("produto.create");
-Route::post('produto', "App\Http\Controllers\ProdutoController@store")->name("produto.store");
-Route::get('produto/{id}', "App\Http\Controllers\ProdutoController@show")->name("produto.show");
-Route::get('produto/{id}/edit', "App\Http\Controllers\ProdutoController@edit")->name("produto.edit");
-Route::put('produto/{id}', "App\Http\Controllers\ProdutoController@update")->name("produto.update");
-Route::delete('produto/{id}', "App\Http\Controllers\ProdutoController@destroy")->name("produto.destroy");
+Route::resource('tipoproduto', "App\Http\Controllers\TipoProdutoController");
+
+// Route::get('produto', "App\Http\Controllers\ProdutoController@index")->name("produto.index");
+// Route::get('produto/create', "App\Http\Controllers\ProdutoController@create")->name("produto.create");
+// Route::post('produto', "App\Http\Controllers\ProdutoController@store")->name("produto.store");
+// Route::get('produto/{id}', "App\Http\Controllers\ProdutoController@show")->name("produto.show");
+// Route::get('produto/{id}/edit', "App\Http\Controllers\ProdutoController@edit")->name("produto.edit");
+// Route::put('produto/{id}', "App\Http\Controllers\ProdutoController@update")->name("produto.update");
+// Route::delete('produto/{id}', "App\Http\Controllers\ProdutoController@destroy")->name("produto.destroy");
 //Esta rota, ela faz automaticamente no padrão que o laravel espera, sem precisar Rota por Rota
-//Route:: resource('produto',"App\Http\Controllers\ProdutoController");
+Route:: resource('produto',"App\Http\Controllers\ProdutoController");
+
+//______________________________________UserInfo
+
+//não precisa de rota para index
+Route::get('userinfo/create', "App\Http\Controllers\UserInfoController@create")->name("userinfo.create");
+Route::post('userinfo', "App\Http\Controllers\UserInfoController@store")->name("userinfo.store");
+Route::get('userinfo/{id}', "App\Http\Controllers\UserInfoController@show")->name("userinfo.show");
+Route::get('userinfo/{id}/edit', "App\Http\Controllers\UserInfoController@edit")->name("userinfo.edit");
+Route::put('userinfo/{id}', "App\Http\Controllers\UserInfoController@update")->name("userinfo.update");
+Route::delete('userinfo/{id}', "App\Http\Controllers\UserInfoController@destroy")->name("userinfo.destroy");
+
+
 
 Route::get('teste', function () {
     $produto = Db::select('SELECT * FROM PRODUTOS where id = 1')[0]; //retorna um array [] ou [obj...]

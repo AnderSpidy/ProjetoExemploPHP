@@ -12,6 +12,7 @@
 </head>
 <body>
     <div class="container">
+        {{-- <?php $message = [ "Texto a ser exibido", "warning" ] ?> --}}
         @if(isset($message))
             <div class="alert alert-{{$message[1]}} alert-dismissible fade show" role="alert">
                 <span>{{$message[0]}}</span>

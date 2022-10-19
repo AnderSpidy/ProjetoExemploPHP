@@ -21,17 +21,20 @@ class ProdutoController extends Controller
         // Esse objeto é um vetor de models
         //$tipoProdutos = TipoProduto::all();
         $produtos = DB::select("SELECT PRODUTOS.ID as id,
-        PRODUTOS.NOME as nome,
-            PRODUTOS.PRECO as preco,
-            TIPO_PRODUTOS.DESCRICAO as descricao
-        FROM PRODUTOS
-        JOIN TIPO_PRODUTOS ON PRODUTOS.TIPO_PRODUTOS_ID = TIPO_PRODUTOS.ID;");
+                                        PRODUTOS.NOME as nome,
+                                        PRODUTOS.PRECO as preco,
+                                        TIPO_PRODUTOS.DESCRICAO as descricao,
+                                        PRODUTOS.ingredientes as ingredientes,
+                                        PRODUTOS.urlImage,
+                                        PRODUTOS.updated_at,
+                                        PRODUTOS.created_at
+                                FROM PRODUTOS
+                                JOIN TIPO_PRODUTOS ON PRODUTOS.TIPO_PRODUTOS_ID = TIPO_PRODUTOS.ID;");
 
 
         }catch(\Throwable $th){
             return $this ->indexMessage([$th -> getMessage(),"danger"]);
         }
-
         return view("Produto/index")->with("produtos", $produtos);
     }
 

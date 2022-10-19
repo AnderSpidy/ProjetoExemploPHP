@@ -28,24 +28,21 @@ class TipoProdutoController extends Controller
         return view("TipoProduto/index")->with("tipoProdutos", $tipoProdutos);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * Mostrar um formulário para criação de um novo recurso
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function indexMessage($message)
+    {
+        try{
+            $tipoProdutos = DB::select('SELECT * FROM TIPO_PRODUTOS');
+        } catch (\Throwable $th){
+            return view("TipoProduto/index")->with("tipoProdutos", [])->with("message", [$th->getMessage(), "danger"]);
+        }
+        // redirect('/produto');
+        return view("TipoProduto/index")->with("tipoProdutos", $tipoProdutos)->with("message", $message);
+    }
     public function create()
     {
         return view("TipoProduto/create");
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * Armazena um recurso recém criado na base de dados.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         try{
@@ -65,11 +62,11 @@ class TipoProdutoController extends Controller
         try{
             // O DB Select sempre retorna um array [obj], [obj,obj,obj,.....] oi []
             $tipoProdutos = DB::select("SELECT TIPO_PRODUTOS.id,
-            TIPO_PRODUTOS.descricao,
-            TIPO_PRODUTOS.updated_at,
-            TIPO_PRODUTOS.created_at
-                FROM TIPO_PRODUTOS
-                WHERE TIPO_PRODUTOS.id = ?", [$id]);
+                                            TIPO_PRODUTOS.descricao,
+                                            TIPO_PRODUTOS.updated_at,
+                                            TIPO_PRODUTOS.created_at
+                                        FROM TIPO_PRODUTOS
+                                        WHERE TIPO_PRODUTOS.id = ?", [$id]);
             //$produto = Produto::find($id); //Retorna um objeto ou NUll
             //dd($produto);
 

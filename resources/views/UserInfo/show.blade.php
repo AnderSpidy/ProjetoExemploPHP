@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Index de TipoProduto</title>
+    <title>Show de UserInfo</title>
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <!-- JavaScript Bundle with Popper -->
@@ -12,43 +12,33 @@
 </head>
 <body>
     <div class="container">
-        {{-- <?php $message = [ "Texto a ser exibido", "warning" ] ?> --}}
-        @if(isset($message))
-            <div class="alert alert-{{$message[1]}} alert-dismissible fade show" role="alert">
-                <span>{{$message[0]}}</span>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
-        <a class="btn btn-primary" href="tipoproduto/create">Criar TipoProduto</a>
-        <a class="btn btn-primary" href="#">Voltar</a>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Descrição</th>
-                    <th scope="col">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($tipoProdutos as $tipoProduto)
-                    <tr>
-                        <th scope="row">{{$tipoProduto->id}}</th>
-                        <td>{{$tipoProduto->descricao}}</td>
-                        <td>
-                            <a href="{{route("tipoproduto.show", $tipoProduto->id)}}" class="btn btn-primary">Mostrar</a>
-                            <a href="{{route("tipoproduto.edit", $tipoProduto->id)}}" class="btn btn-secondary">Editar</a>
-                            <a href="#"
-                            class="btn btn-danger class-button-destroy"
-                            data-bs-toggle="modal"
-                            data-bs-target="#destroyModal"
-                            value="{{route("tipoproduto.destroy", $tipoProduto->id)}}">Remover</a>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+        {{-- <a class="btn btn-primary" href="{{redirect()->route("userInfo.edit")->with("userInfo",$userInfo)}}">Editar</a> --}}
+        <a  class="btn btn-danger class-button-destroy" data-bs-toggle="modal" data-bs-target="#destroyModal" href="{{route("userinfo.destroy",1)}}">Excluir</a>
+        <div class="form-group">
+            <label for="id-input-id">ID</label>
+            <input type="text" class="form-control" value={{$userInfo->Users_id}} disabled>
+        </div>
+        <div class="form-group">
+            <label for="id-input-descricao">profileImg</label>
+            <input type="text" class="form-control" value={{$userInfo->profileImg}} disabled>
+        </div>
+        <div class="form-group">
+            <label for="id-input-id">Status</label>
+            <input type="text" class="form-control" value={{$userInfo->status}} disabled>
+        </div>
 
+        <div class="form-group">
+            <label for="id-input-descricao">dataNasc</label>
+            <input type="text" class="form-control" value={{$userInfo->dataNasc}} disabled>
+        </div>
+
+        <div class="form-group">
+            <label for="id-input-descricao">Genero</label>
+            <input type="text" class="form-control" value={{$userInfo->genero}} disabled>
+        </div>
+
+
+    </div>
     <!-- Modal -->
     <div class="modal fade" id="destroyModal" tabindex="-1" aria-labelledby="destroyModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -84,5 +74,6 @@
             formModalBotaoRemover.setAttribute("action", this.getAttribute("value"));
         }
     </script>
+
 </body>
 </html>
