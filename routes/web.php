@@ -49,6 +49,14 @@ Route::get('userinfo/{id}/edit', "App\Http\Controllers\UserInfoController@edit")
 Route::put('userinfo/{id}', "App\Http\Controllers\UserInfoController@update")->name("userinfo.update");
 Route::delete('userinfo/{id}', "App\Http\Controllers\UserInfoController@destroy")->name("userinfo.destroy");
 
+//______________________________________Endereço
+Route::get('endereco', "App\Http\Controllers\EnderecoController@index")->name("endereco.index");
+Route::get('endereco/create', "App\Http\Controllers\EnderecoController@create")->name("endereco.create");
+Route::post('endereco', "App\Http\Controllers\EnderecoController@store")->name("endereco.store");
+Route::get('endereco/{id}', "App\Http\Controllers\EnderecoController@show")->name("endereco.show");
+Route::get('endereco/{id}/edit', "App\Http\Controllers\EnderecoController@edit")->name("endereco.edit");
+Route::put('endereco/{id}', "App\Http\Controllers\EnderecoController@update")->name("endereco.update");
+Route::delete('endereco/{id}', "App\Http\Controllers\EnderecoController@destroy")->name("endereco.destroy");
 
 
 Route::get('teste', function () {
@@ -80,3 +88,7 @@ function($nome, $preco, $Tipo_Produtos_id, $ingredientes, $urlImage){
     $produto->urlImage = $urlImage;
     $produto->save();
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

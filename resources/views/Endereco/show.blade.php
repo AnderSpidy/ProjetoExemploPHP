@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Show de Produto</title>
+    <title>Show de Endereco</title>
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <!-- JavaScript Bundle with Popper -->
@@ -14,39 +14,39 @@
     <div class="container">
         <div class="form-group">
             <label class="form-label">ID</label>
-            <input type="text" class="form-control" value={{$produto->id}} disabled>
+            <input type="text" class="form-control" value={{$endereco->id}} disabled>
         </div>
         <div class="form-group">
-            <label class="form-label">Nome</label>
-            <input type="text" class="form-control" value={{$produto->nome}} disabled>
+            <label class="form-label">Users_id</label>
+            <input type="text" class="form-control" value={{$endereco->users_id}} disabled>
         </div>
         <div class="form-group">
-            <label class="form-label">Preço</label>
-            <input type="text" class="form-control" value={{$produto->preco}} disabled>
+            <label class="form-label">Bairro</label>
+            <input type="text" class="form-control" value={{$endereco->bairro}} disabled>
         </div>
         <div class="form-group">
-            <label class="form-label">Descrição</label>
-            <input type="text" class="form-control" value={{$produto->descricao}} disabled>
+            <label class="form-label">Logradouro</label>
+            <input type="text" class="form-control" value={{$endereco->logradouro}} disabled>
         </div>
         <div class="form-group">
-            <label class="form-label">Ingredientes</label>
-            <input type="text" class="form-control" value={{$produto->ingredientes}} disabled>
+            <label class="form-label">Número</label>
+            <input type="text" class="form-control" value={{$endereco->numero}} disabled>
         </div>
         <div class="form-group">
-            <label class="form-label">urlImage</label>
-            <input type="text" class="form-control" value={{$produto->urlImage}} disabled>
+            <label class="form-label">Complemento</label>
+            <input type="text" class="form-control" value={{$endereco->complemento}} disabled>
         </div>
         <div class="form-group">
             <label class="form-label">Updated_At</label>
-            <input type="text" class="form-control" value={{$produto->updated_at}} disabled>
+            <input type="text" class="form-control" value={{$endereco->updated_at}} disabled>
         </div>
         <div class="form-group">
             <label class="form-label">Created_At</label>
-            <input type="text" class="form-control" value={{$produto->created_at}} disabled>
+            <input type="text" class="form-control" value={{$endereco->created_at}} disabled>
         </div>
 
         <div class="m-3">
-            <a href="{{route("produto.index")}}" class="btn btn-primary">Voltar</a>
+            <a href="{{route("endereco.index")}}" class="btn btn-primary">Voltar</a>
         </div>
     </div>
 

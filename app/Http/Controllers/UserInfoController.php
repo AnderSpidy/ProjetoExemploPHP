@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\UserInfo;
+use Illuminate\Support\Facades\Auth;
 
 class UserInfoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth:web'); // Especificando qual guarda estamos utilizando
+    }
     public function index()
     {
         //
@@ -33,106 +34,96 @@ class UserInfoController extends Controller
 
     public function store(Request $request)
     {
-        // try{
+        // Pega o id do usuário logado
+        $loggedUserId = Auth::user()->id;
 
-
+        try{
             $userInfo = new UserInfo();
-            $userInfo-> Users_id = 1;
-            $userInfo-> status = 'A';
-            $userInfo-> profileImg = $request-> profileImg;
-            $userInfo-> dataNasc = $request->dataNasc;
-            $userInfo-> genero = $request->genero;
-            $userInfo-> save();
-            return redirect()->route("userinfo.show",1)->with("userInfo",$userInfo);
-
-        // }catch(\Throwable $th){
-        //     return $this->showMessage([$th->getMessage(), "danger"]);
-        // }
-
-        // return $this->showMessage(["UserInfo cadastrado com sucesso", "sucesso"]);
+            $userInfo->Users_id = $loggedUserId;
+            $userInfo->status = 'A';
+            $userInfo->profileImg = $request->profileImg;
+            $userInfo->dataNasc = $request->dataNasc;
+            $userInfo->genero = $request->genero;
+            $userInfo->save();
+        } catch (\Throwable $th) {
+            return view("UserInfo/create")->with("message", [$th->getMessage(), "danger"]);
+        }
+        $userInfo = UserInfo::where('Users_id', $loggedUserId)->first();
+        return view("UserInfo/show")->with("userInfo", $userInfo)->with("message", ["Informação cadastrada com sucesso", "success"]);
     }
 
     public function show($id)
     {
-        $userInfo = UserInfo::where('Users_id',$id)-> first();
-        if(isset($userInfo)){
-            return view("UserInfo/show")->with("userInfo", $userInfo);
+        try {
+            $userInfo = UserInfo::where('Users_id', $id)->where('Users_id', Auth::user()->id)->first();
+            //$userInfo = UserInfo::find($id);
+            if(isset($userInfo)){
+                // Returno do sucesso
+                return view("UserInfo/show")->with("userInfo", $userInfo);
+            }
+            // Returno do aviso
+            return view("home");
+        } catch (\Throwable $th) {
+            // Returno do erro
+            return view("UserInfo/create")->with("message", [$th->getMessage(), "danger"]);
         }
-        return view("UserInfo/create");
-
-
-
-        // try{
-        //     $userInfo = DB::select('SELECT * FROM USER_INFOS');
-        //     if(count($userInfo)>0){
-        //         return view("UserInfo/show")->with("userInfo",$userInfo[0]);
-        //     }
-        //     else{
-        //         return $this->indexMessage(["UserInfo não foi encontrado", "warning"]);
-        //     }
-        // }catch(\Throwablw $th){
-        //     return $this->indexMessage([$th->getMessage(),"danger"]);
-        // }
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        // try{
-            $userInfo = UserInfo::find($id); //retorna obj ou null
-            //Se o obj é valido ou null
+        try {
+            $userInfo = UserInfo::where('Users_id', $id)->where('Users_id', Auth::user()->id)->first();
+            //$userInfo = UserInfo::find($id);
             if(isset($userInfo)){
-                return view("UserInfo/edit")->with("userInfo",$userInfo);
-            }else{
-                return $this->showMessage(["UserInfo não encontrado", "warning"]);
+                return view("UserInfo/edit")->with("userInfo", $userInfo);
             }
-        // }catch(\Throwable $th){
-        //     return $this->showMessage([$th->getMessage(), "danger"]);
-        // }
+            // Returno do aviso
+            return view("home");
+        } catch (\Throwable $th) {
+            // Returno do erro
+            return view("UserInfo/create")->with("message", [$th->getMessage(), "danger"]);
+        }
     }
 
     public function update(Request $request, $id)
     {
-        // try{
-            $userInfo = UserInfo::find($id);
+        try {
+            // Pega o id do usuário logado
+            $loggedUserId = Auth::user()->id;
 
+            $userInfo = UserInfo::where('Users_id', $id)->first();
             if(isset($userInfo)){
-                $userInfo-> profileImg = $request-> profileImg;
-                $userInfo-> dataNasc = $request->dataNasc;
-                $userInfo-> genero = $request->genero;
+                $userInfo->Users_id = $loggedUserId;
+                $userInfo->status = 'A';
+                $userInfo->profileImg = $request->profileImg;
+                $userInfo->dataNasc = $request->dataNasc;
+                $userInfo->genero = $request->genero;
                 $userInfo->update();
-                //Recarregar a view index
-                return $this->showMessage(["UserInfo atualizado com sucesso", "success"]);
-            }else{
-                return $this->showMessage(["UserInfo não encontrado", "warning"]);
             }
-
-        // }catch(\Throwable $th){
-        //     return $this->showMessage([$th->getMessage(), "danger"]);
-        // }
+            $userInfo = UserInfo::where('Users_id', $loggedUserId)->first();
+            return view("UserInfo/show")->with("userInfo", $userInfo)->with("message", ["Informação atualizada com sucesso", "success"]);
+        } catch (\Throwable $th) {
+            // Returno do erro
+            return view("UserInfo/create")->with("message", [$th->getMessage(), "danger"]);
+        }
     }
 
 
     public function destroy($id)
     {
-        // try{
-            $userInfo = UserInfo :: find($id); //Retirna o objeto, caso contrario retorna null
-            //se existir
+        try {
+            $userInfo = UserInfo::where('Users_id', $id)->where('Users_id', Auth::user()->id)->first();
+            //$userInfo = UserInfo::find($id);
             if(isset($userInfo)){
-                $userInfo -> delete();
-                return view("UserInfo/create");
-
+                $userInfo->delete();
+                return view("UserInfo/create")->with("message", ["Informação removida com sucesso", "success"]);
             }
-             //Retorno do aviso, caso nao encontre o produto
-             return $this-> showMessage(["TipoProduto não foi encontrado", "warning"]);
-        // }catch(\Throwable $th){
-        //     return $this-> indexMessage([$th -> getMessage(), "danger"]);
-        // }
+            // Returno do aviso
+            return view("home");
+        } catch (\Throwable $th) {
+            // Returno do erro
+            return view("UserInfo/create")->with("message", [$th->getMessage(), "danger"]);
+        }
     }
 }
