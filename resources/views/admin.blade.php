@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">Admin Dashboard</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,10 +14,9 @@
                         </div>
                     @endif
 
-
                     <a href="#" class="btn btn-primary">Gerenciar Pedidos</a>
-                    <a href="{{route("endereco.index")}}" class="btn btn-primary">Gerenciar Endereços</a>
-                    <a href="{{route("userinfo.create")}}" class="btn btn-primary">Gerenciar Informações Adicionais</a>
+                    <a href="{{route("produto.index")}}" class="btn btn-primary">Gerenciar Produtos</a>
+                    <a href="{{route("tipoproduto.index")}}" class="btn btn-primary">Gerenciar Tipo de Produtos</a>
                     <a href="/" class="btn btn-primary">Voltar</a>
                 </div>
             </div>

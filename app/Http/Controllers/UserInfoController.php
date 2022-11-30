@@ -9,29 +9,45 @@ use Illuminate\Support\Facades\Auth;
 
 class UserInfoController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('auth:web'); // Especificando qual guarda estamos utilizando
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         //
     }
-    public function showMessage($message)
-    {
-        try{
-            $userInfo = DB::select('SELECT * FROM USER_INFOS');
-        } catch (\Throwable $th){
-            return view("UserInfo/show")->with("tipoProdutos", [])->with("message", [$th->getMessage(), "danger"]);
-        }
 
-        return view("UserInfo/show")->with("tipoProdutos", $userInfo)->with("message", $message);
-    }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
+        $userInfo = UserInfo::where('Users_id', Auth::user()->id)->first();
+        if($userInfo)
+            return view("UserInfo/show")->with("userInfo", $userInfo);
         return view("UserInfo/create");
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         // Pega o id do usuário logado
@@ -52,6 +68,12 @@ class UserInfoController extends Controller
         return view("UserInfo/show")->with("userInfo", $userInfo)->with("message", ["Informação cadastrada com sucesso", "success"]);
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function show($id)
     {
         try {
@@ -67,9 +89,14 @@ class UserInfoController extends Controller
             // Returno do erro
             return view("UserInfo/create")->with("message", [$th->getMessage(), "danger"]);
         }
-
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function edit($id)
     {
         try {
@@ -86,6 +113,13 @@ class UserInfoController extends Controller
         }
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, $id)
     {
         try {
@@ -107,9 +141,15 @@ class UserInfoController extends Controller
             // Returno do erro
             return view("UserInfo/create")->with("message", [$th->getMessage(), "danger"]);
         }
+
     }
 
-
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id)
     {
         try {
@@ -125,5 +165,6 @@ class UserInfoController extends Controller
             // Returno do erro
             return view("UserInfo/create")->with("message", [$th->getMessage(), "danger"]);
         }
+
     }
 }

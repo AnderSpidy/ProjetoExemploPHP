@@ -12,7 +12,7 @@ class ProdutoController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:web'); // Especificando qual guarda estamos utilizando
+        $this->middleware('auth:admin'); // Especificando qual guarda estamos utilizando
     }
 
     public function index()
@@ -119,7 +119,7 @@ class ProdutoController extends Controller
     public function edit($id)
     {
         try {
-            dd($id);
+            
             $produto = Produto::find($id); // retorna um obj ou null
             // Pergunto se o obj é válido ou null
             if( isset($produto) ){

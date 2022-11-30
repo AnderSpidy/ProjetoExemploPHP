@@ -38,6 +38,7 @@
             </div>
             <div class="my-1">
                 <button type="submit" class="btn btn-primary">Salvar</button>
+                <a href="{{route("userinfo.show", $userInfo->Users_id)}}" class="btn btn-primary"></a>
             </div>
           </form>
     </div>

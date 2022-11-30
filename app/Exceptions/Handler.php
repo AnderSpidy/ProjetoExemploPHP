@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Arr;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -38,4 +39,30 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    /**
+     * Essa função captura uma exception que é causada quando um usuário não está autenticado.
+     *
+    */
+    protected function unauthenticated($request, \Illuminate\Auth\AuthenticationException $exception){
+        if ($request->expectsJson()) {
+            return response()->json(['error' => 'Unauthenticated.'], 401);
+        }
+
+        $guard = Arr::get($exception->guards(), 0);
+
+        //print_r($guard);
+
+        switch ($guard) {
+            case 'admin':
+                $login = 'admin.login';
+                break;
+            default:
+                $login = 'login';
+                break;
+        }
+
+        return redirect()->guest(route($login));
+    }
+
 }
