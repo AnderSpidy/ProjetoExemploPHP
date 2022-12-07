@@ -118,9 +118,13 @@ Route::prefix('admin')->group(function () {
 });
 
 //Rotas para Pedidos de usuário
-Route::get('/pedido/usuario', "App\Http\Controllers\PedidoUsuarioController@index");
+Route::get('/pedido/usuario', "App\Http\Controllers\PedidoUsuarioController@index")->name("pedidousuario.index");
 Route::post('/pedido/usuario', "App\Http\Controllers\PedidoUsuarioController@index");
 Route::get('/confirmar-pedido/usuario', "App\Http\Controllers\PedidoUsuarioController@confirmarPedido");
 Route::post('/confirmar-pedido/usuario', "App\Http\Controllers\PedidoUsuarioController@confirmarPedido");
 
-Route::get('/pedido/usuario/getprodutos/{id}', "App\Http\Controllers\PedidoUsuarioController@getProdutos");
+Route::get("/pedido/usuario/getprodutos/{id}", "App\Http\Controllers\PedidoUsuarioController@getProdutos")->name("pedidousuario.getProdutos");
+
+//Rotas de pedidoAdmin
+Route::get("/pedido/admin", "App\Http\Controllers\PedidoAdminController@index")->name("pedidoadmin.index");
+Route::get("/pedido/admin/getpedidos", "App\Http\Controllers\PedidoAdminController@getPedidos")->name("pedidoadmin.getPedidos");
