@@ -23,6 +23,8 @@
                         <option value="1">Pizza</option>
                         <option value="2">Suco</option>
                         <option value="3">Cerveja</option>
+                        <option value="4">Cerveja</option>
+                        <option value="5">Cerveja</option>
                     </select>
                 </div>
             </div>

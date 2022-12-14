@@ -2,23 +2,13 @@
 
 @section('content')
     <link rel="stylesheet" href="{{asset('css/PedidoAdmin/pedidoAdmin.css')}}">
-    <script src="{{asset('js/PedidoAdmin/pedidoAdmin.js'}}"></script>
+    <script src="{{asset('js/pedidoAdmin.js')}}"></script>
     <div class="container">
         <div class="row">
             {{-- Parte da esquerda --}}
             <div class="col-md-3">
                 <a class="btn btn-primary w-100" href="{{route("admin.dashboard")}}">Voltar</a>
                 <div id="list-pedidos" class="list-group my-3 overflow-auto">
-                    <a href="#" class="list-group-item list-group-item-action">Pedido 10</a>
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-warning">Pedido 9</a>
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-warning">Pedido 8</a>
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-danger">Pedido 7</a>
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-secondary">Pedido 6</a>
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-secondary">Pedido 5</a>
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-success">Pedido 4</a>
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-success">Pedido 3</a>
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-danger">Pedido 2</a>
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-success">Pedido 1</a>
                 </div>
             </div>
             {{-- Parte do meio --}}
