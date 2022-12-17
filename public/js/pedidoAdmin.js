@@ -32,42 +32,42 @@ $(document).ready( function() {
     }
 
     function printPedidosEstatus(agrupamentPedido){
-        divListPedidos = $("#list-pedidos");
+        const listaPedidos = $("#list-pedidos");
 
-        divListPedidos.html("");
-        agrupamentPedido.forEach(pedidos_tipo => {
-            if(pedidos_tipo[0].status == 'A') {
-                divListPedidos.append(`
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-secondary" value="${pedidos_tipo[0].id}">
-                        Pedido ${pedidos_tipo[0].id}
+        listaPedidos.html("");
+        agrupamentPedido.forEach(TipoPedidos => {
+            if(TipoPedidos[0].status == 'A') {
+                listaPedidos.append(`
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-secondary" value="${TipoPedidos[0].id}">
+                        Pedido ${TipoPedidos[0].id}
                     </a>
                 `);
             }
-            else if(pedidos_tipo[0].status == 'R') {
-                divListPedidos.append(`
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-warning" value="${pedidos_tipo[0].id}">
-                        Pedido ${pedidos_tipo[0].id}
+            if(TipoPedidos[0].status == 'R') {
+                listaPedidos.append(`
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-warning" value="${TipoPedidos[0].id}">
+                        Pedido ${TipoPedidos[0].id}
                     </a>
                 `);
             }
-            else if(pedidos_tipo[0].status == 'C') {
-                divListPedidos.append(`
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-danger" value="${pedidos_tipo[0].id}">
-                        Pedido ${pedidos_tipo[0].id}
+            if(TipoPedidos[0].status == 'C') {
+                listaPedidos.append(`
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-danger" value="${TipoPedidos[0].id}">
+                        Pedido ${TipoPedidos[0].id}
                     </a>
                 `);
             }
-            else if(pedidos_tipo[0].status == 'E') {
-                divListPedidos.append(`
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-primary" value="${pedidos_tipo[0].id}">
-                        Pedido ${pedidos_tipo[0].id}
+            if(TipoPedidos[0].status == 'E') {
+                listaPedidos.append(`
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-primary" value="${TipoPedidos[0].id}">
+                        Pedido ${TipoPedidos[0].id}
                     </a>
                 `);
             }
-            else if(pedidos_tipo[0].status == 'F') {
-                divListPedidos.append(`
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-success" value="${pedidos_tipo[0].id}">
-                        Pedido ${pedidos_tipo[0].id}
+            if(TipoPedidos[0].status == 'F') {
+                listaPedidos.append(`
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-success" value="${TipoPedidos[0].id}">
+                        Pedido ${TipoPedidos[0].id}
                     </a>
                 `);
             }
